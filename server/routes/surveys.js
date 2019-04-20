@@ -9,6 +9,7 @@ let User = userModel.User;
 let surveyController = require('../controllers/surveys');
 
 
+
 function requireAuth(req, res, next) {
     // check if the user is logged in
     if(!req.isAuthenticated()) {
@@ -18,7 +19,7 @@ function requireAuth(req, res, next) {
 }
 
 /* GET Contact List page - READ Operation */
-router.get('/', passport.authenticate('jwt', {session: false}), surveyController.displaysurveyList);
+//router.get('/', passport.authenticate('jwt', {session: false}), surveyController.displaysurveyList);
 
 /* GET Route for the Add page 
    this will display the Add page */
@@ -33,5 +34,12 @@ router.post('/edit/:id', passport.authenticate('jwt', {session: false}), surveyC
 
 /* GET request to perform the delete action */
 router.get('/delete/:id', passport.authenticate('jwt', {session: false}), surveyController.performDelete);
+
+
+router.get('/', passport.authenticate('jwt', {session: false}), surveyController.displayAllSurveys);
+
+
+router.get('/:id', passport.authenticate('jwt', {session: false}), surveyController.displaySurvey);
+
 
 module.exports = router;

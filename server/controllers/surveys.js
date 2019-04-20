@@ -5,6 +5,35 @@ let jwt = require('jsonwebtoken');
 // create a reference to the db schema
 let surveyModel = require('../models/surveys');
 let surveyQues = require('../models/surveyques');
+let listofsurveys = require('../models/listofsurveys');
+
+
+module.exports.displayAllSurveys = (req, res, next) =>{
+    listofsurveys.find((err, surveyList) => {
+        console.log('d');
+        if(err) {
+            return console.error(err);
+        }
+        else {
+            console.log('ds');
+           res.json({success: true, msg: 'Survey List Displayed Successfully', surveyList: surveyList, user: req.user});
+        }
+    });
+}
+module.exports.displaySurvey = (req, res, next) => {
+    let id = req.params.id;
+
+    surveyQues.find({surveyid: id},(err,survey) => {
+        if(err) {
+            console.log(err);
+            res.end(err);
+        }
+        else {
+            res.json({success: true, msg: 'Successfully Displayed Survey ', survey: survey, user: req.user});
+        }
+    })
+}
+
 
 module.exports.displaysurveyList = (req, res, next) =>{
     surveyModel.find((err, surveyList) => {
@@ -22,14 +51,16 @@ module.exports.displayAddPage = (req, res, next) => {
 }
 
 module.exports.processAddPage = (req, res, next) => {
-
+    var ans = JSON.stringify(req.body.ans);
+   console.log(ans);
     let newsurvey = surveyModel({
         email: req.body.email,
         surveyid: req.body.surveyid,
-        answers: [{
-            quesid: req.body.quesid,
-            ans: req.body.ans
-        }]
+        
+        answers:{
+            quesid: ans.questionid,
+            ans: ans.ans
+        }
     });
 
     surveyModel.create(newsurvey, (err, surveyModel) => {

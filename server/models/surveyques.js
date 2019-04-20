@@ -4,10 +4,14 @@ let mongoose = require('mongoose');
 let surveySchema = mongoose.Schema({
     email: String,
     surveyid: String,
-    questions: {
+    questions: [{
         quesid: String,
-        question: String
-    }
+        question: String,
+        option1:String,
+        option2:String,
+        option3:String,
+        option4:String
+    }]
 },
 {
     collection: "surveyques"

@@ -8,7 +8,7 @@ let cors = require('cors');
 // modules for authentication
 let session = require('express-session');
 let passport = require('passport');
-
+let surveysRouter=require('../routes/surveys');
 let passportJWT = require('passport-jwt');
 let JWTStrategy = passportJWT.Strategy;
 let ExtractJWT = passportJWT.ExtractJwt;
@@ -91,6 +91,7 @@ passport.use(strategy);
 
 
 app.use('/api', indexRouter);
+app.use('/surveys/survey-list', passport.authenticate('jwt', {session: false}), surveysRouter);
 app.use('/api/contact-list', passport.authenticate('jwt', {session: false}), contactRouter); // TODO - Protect this section
 app.get('*', (req, res) => {
   res.sendfile(path.join(__dirname, '../../public/index.html'));
