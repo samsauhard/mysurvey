@@ -1,10 +1,10 @@
-<!-- Content for the Details Page -->
+<!-- Content for the Edit Page -->
 <div class="container">
   <div class="row">
       <div class="col-md-offset-3 col-md-6">
           <h1>{{ title }}</h1>
 
-          <form class="form" (submit)="onDetailsPageSubmit()">
+          <form class="form" (submit)="onContactDetailsSubmit()">
               <div class="form-group">
                   <label for="FirstNameTextField">First Name</label>
                   <input type="text" class="form-control"
@@ -29,7 +29,7 @@
 
               <div class="form-group">
                   <label for="AgeTextField">Age</label>
-                  <input type="number" class="form-control"
+                  <input type="text" class="form-control"
                   id="AgeTextField"
                   placeholder="Enter Age"
                   name="age"
