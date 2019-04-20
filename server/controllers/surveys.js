@@ -52,14 +52,17 @@ module.exports.displayAddPage = (req, res, next) => {
 
 module.exports.processAddPage = (req, res, next) => {
     var ans = JSON.stringify(req.body.ans);
+    var quesid = JSON.parse(ans)[0].questionid;
+    var ans1 = JSON.parse(ans)[0].answer;
+    console.log();
    console.log(ans);
     let newsurvey = surveyModel({
         email: req.body.email,
         surveyid: req.body.surveyid,
         
         answers:{
-            quesid: ans.questionid,
-            ans: ans.ans
+            quesid: quesid,
+            ans: ans1
         }
     });
 
