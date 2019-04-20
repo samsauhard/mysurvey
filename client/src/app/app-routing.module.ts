@@ -10,6 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { SurveyAnsComponent } from './pages/survey-ans/survey-ans.component';
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
+  {path: 'dashboard', component: HomeComponent, data: {title: 'Home'}},
   {path: 'about', component: AboutComponent, data: {title: 'About'}},
   {path: 'surveys', component: SurveysComponent, data: {title: 'Surveys'}}, 
   {path: 'surveys/survey-list/', component: SurveysComponent, data: {title: 'Surveys'},canActivate: [AuthGuard]},
